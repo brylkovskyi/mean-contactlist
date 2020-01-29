@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongodb = require("mongodb");
-const ObjectID = mongodb.ObjectID;
+const MongoClient = require("mongodb").MongoClient;
+// const ObjectID = mongodb.ObjectID;
+const uri = "mongodb+srv://admin:admin@cluster0-6ep8s.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
 
 const CONTACTS_COLLECTION = "contacts";
 
@@ -12,7 +14,7 @@ app.use(bodyParser.json());
 let db;
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", function (err, client) {
+client.connect((err, client) => {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -54,6 +56,7 @@ app.get("/api/contacts", (req, res) => {
 
 app.post("/api/contacts", (req, res) => {
   const newContact = req.body;
+  console.log(req.body);
   newContact.createDate = new Date();
 
   if (!req.body.name) {
