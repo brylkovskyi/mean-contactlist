@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 const distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
+console.log(distDir);
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 let db;
