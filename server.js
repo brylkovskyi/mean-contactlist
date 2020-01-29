@@ -25,8 +25,8 @@ client.connect((err, client) => {
   console.log("Database connection ready");
 
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
+  const server = app.listen(process.env.PORT || 8080, function () {
+    const port = server.address().port;
     console.log("App now running on port", port);
   });
 });
