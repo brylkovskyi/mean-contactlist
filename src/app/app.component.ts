@@ -33,11 +33,11 @@ export class AppComponent implements OnInit {
   }
 
   addContact(name, email) {
-    this.refetchData();
     const reqBody = {
       name: name.value,
       email: email.value
     };
+
     this.http.post('/api/contacts/', reqBody)
       .subscribe((data) => {
         if (data) {
